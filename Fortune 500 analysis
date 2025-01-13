@@ -1,0 +1,23 @@
+-- Which companies have revenue over $100 billions and which one is the highest?--
+SELECT company_name, ROUND(MAX(revenue)) AS company_revenues
+FROM fortune_companies
+GROUP BY industry
+HAVING revenue>=100
+ORDER BY revenue desc;
+
+
+--Which companies have the most paid time off days?--
+SELECT company_name,industry,
+CASE WHEN paid_time_off_days>= 20 THEN 'HIGH'
+WHEN paid_time_off_days>= 10 THEN 'AVERAGE'
+ELSE 'LOW'
+END AS paid_time_off_days
+FROM fortune_companies
+GROUP BY industry
+ORDER BY industry desc;
+
+
+--Which companies in the Retail industry have the least amount of employees?--
+SELECT company_name,industry, MIN(employees) AS employees
+FROM fortune_companies
+WHERE industry='Retail';
